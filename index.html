@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>خطة 30 يوماً: Linux و Bash و Administration</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+:root{--bg:#f7f3ea;--sf:#fff;--ink:#23211c;--mu:#6b665a;--ac:#17695a;--soft:#e2f0eb;--dn:#2f8a47;--ln:#e5ddc9;--sh:0 4px 14px rgba(60,50,20,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14151a;--sf:#1e1f26;--ink:#efeadc;--mu:#a8a290;--ac:#6fcfb0;--soft:#1f3830;--dn:#7fd492;--ln:#34353d;--sh:0 4px 14px rgba(0,0,0,.4)}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Noto Naskh Arabic",serif;font-size:21px;line-height:2;background:var(--bg);color:var(--ink)}
+header{text-align:center;padding:36px 16px 20px;background:linear-gradient(180deg,var(--soft),var(--bg))}
+h1{font-size:2.1rem;margin:0 0 4px;color:var(--ac);font-weight:700}
+.sub{color:var(--mu);margin:0;font-size:1.05rem}
+.pw{max-width:720px;margin:18px auto 0;background:var(--sf);border:1px solid var(--ln);border-radius:99px;height:14px;overflow:hidden}
+#bar{height:100%;width:0;background:var(--ac);transition:width .4s}
+#pt{margin-top:6px;color:var(--mu);font-size:1.05rem}
+main{width:100%;max-width:1000px;margin:20px auto 130px;padding:0 14px;display:flex;flex-direction:column;gap:16px}
+.card{width:100%;background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:18px 20px;box-shadow:var(--sh)}
+.card.done{border-color:var(--dn)}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dn{color:var(--ac);font-weight:700;font-size:1.05rem}
+.dt{margin:0;font-size:1.45rem;font-weight:700}
+.ck{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ac);background:transparent;color:var(--ac);border-radius:99px;padding:4px 18px;font:inherit;font-weight:700;font-size:1.05rem;cursor:pointer}
+.ck.on{background:var(--dn);border-color:var(--dn);color:#fff}
+.tp{margin-top:14px;padding-top:10px;border-top:1px dashed var(--ln)}
+.tn{margin:0;font-weight:700;font-size:1.2rem;color:var(--ac)}
+.q{list-style:none;margin:6px 0 0;padding:0}
+.q li{display:flex;gap:10px;align-items:flex-start;padding:4px 0}
+.q input{width:22px;height:22px;margin-top:9px;accent-color:var(--ac);flex-shrink:0}
+.q span{font-size:1.08rem}
+.q li.c span{opacity:.55;text-decoration:line-through}
+.fab{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:8px;background:var(--ac);color:#fff;border:0;border-radius:99px;padding:12px 28px;font:inherit;font-weight:700;font-size:1.2rem;box-shadow:0 8px 22px rgba(0,0,0,.28);cursor:pointer;z-index:10}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 20px;border-radius:12px;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.s{opacity:1}
+@media(min-width:700px){body{font-size:22px}.card{padding:22px 28px}}
+</style>
+</head>
+<body>
+<header>
+<h1>خطة 30 يوماً</h1>
+<p class="sub">Linux Ubuntu Administration مع Bash Scripting</p>
+<div class="pw"><div id="bar"></div></div>
+<div id="pt"></div>
+</header>
+<main id="g"></main>
+<button class="fab" id="sv"><span class="material-icons">save</span>حفظ التقدم</button>
+<div class="toast" id="ts">تم حفظ تقدمك</div>
+<script>
+const P=[
+["الطرفية والتنقل",[["أول خطواتك في الطرفية",["ما الفرق بين Terminal و Shell و Bash؟","كيف أقرأ الـ prompt وماذا تعني كل أجزائه؟"]],["التنقل في النظام",["ما الفرق بين المسار المطلق والنسبي؟","ماذا تعني الرموز . و .. و ~ و - مع cd؟"]],["طلب المساعدة",["كيف أستخدم man و --help لفهم أي أمر؟","كيف أبحث داخل صفحة man عن خيار معين؟"]]]],
+["الملفات والمجلدات",[["إنشاء ونسخ ونقل",["ما الفرق بين cp و mv و rm وما خطر rm -rf؟","كيف أنسخ مجلداً كاملاً بخصائصه؟"]],["هيكل الأنظمة",["ما وظيفة كل مجلد في /etc و /var و /home و /usr؟","ما الفرق بين الرابط الرمزي والرابط الصلب؟"]]]],
+["قراءة الملفات والبحث",[["عرض المحتوى",["متى أستخدم cat ومتى less ومتى tail -f؟","كيف أعرض أول وآخر عشرة أسطر من ملف؟"]],["البحث",["كيف يعمل grep وما أهم خياراته -i -r -n؟","ما الفرق بين find و locate؟"]]]],
+["الأنابيب وإعادة التوجيه",[["المخرجات",["ما الفرق بين stdout و stderr و stdin؟","ما الفرق بين > و >> و 2> و &>؟"]],["الأنابيب",["كيف يعمل الأنبوب | بين أمرين؟","ماذا يفعل tee و xargs ومتى أحتاجهما؟"]]]],
+["الصلاحيات والملكية",[["نظام الصلاحيات",["كيف أقرأ مخرجات ls -l حرفاً بحرف؟","كيف أحوّل rwx إلى أرقام مثل 755 و644؟"]],["التعديل",["ما الفرق بين chmod و chown و chgrp؟","ما هو umask وكيف يحدد صلاحيات الملفات الجديدة؟"]]]],
+["المستخدمون والمجموعات",[["إدارة المستخدمين",["كيف أنشئ مستخدماً وأحذفه بـ useradd و adduser؟","أين تُخزَّن المستخدمون في /etc/passwd و /etc/shadow؟"]],["الصلاحيات الإدارية",["كيف يعمل sudo وما ملف sudoers؟","لماذا يُفضَّل visudo على تعديل الملف مباشرة؟"]]]],
+["مراجعة الأسبوع الأول",[["تطبيق عملي",["كيف أبني هيكل مشروع مجلدات بأمر واحد؟","كيف أنشئ مستخدماً وأعطيه مجلداً بصلاحيات محددة؟"]]]],
+["العمليات",[["مراقبة العمليات",["ما الفرق بين ps و top و htop؟","ما هو PID وكيف أعرف أب العملية PPID؟"]],["التحكم",["ما الفرق بين kill و kill -9 وما الإشارات SIGTERM و SIGKILL؟","كيف أشغّل أمراً في الخلفية بـ & و nohup؟"]]]],
+["إدارة الحزم",[["apt",["ما الفرق بين apt update و apt upgrade؟","كيف أبحث عن حزمة وأعرف ما بداخلها؟"]],["المصادر",["ما هو ملف sources.list ولماذا توجد مستودعات إضافية PPA؟","كيف أتحقق من أمان الحزمة عبر مفاتيح GPG؟"]]]],
+["الخدمات systemd",[["systemctl",["ما الفرق بين start و enable؟","كيف أعرف سبب فشل خدمة بأمر status؟"]],["ملفات الوحدة",["كيف يبدو ملف service وما أقسامه؟","كيف أنشئ خدمة خاصة بي لتعمل عند الإقلاع؟"]]]],
+["السجلات",[["مكان السجلات",["ماذا يوجد في /var/log وما أهم ملفاته؟","ما الفرق بين syslog و journald؟"]],["التحليل",["كيف أستخدم journalctl بالفلاتر -u و -p و --since؟","كيف أجد محاولات الدخول الفاشلة في auth.log؟"]]]],
+["المتغيرات والمحرر",[["البيئة",["ما الفرق بين متغير الصدفة ومتغير البيئة؟","كيف يعمل PATH وكيف أضيف مجلداً إليه دائماً؟"]],["المحرر",["ما أوضاع vim الأساسية وكيف أحفظ وأخرج؟","متى أختار nano بدل vim؟"]]]],
+["أول سكربت Bash",[["الأساسيات",["ما هو shebang ولماذا نكتب #!/bin/bash؟","كيف أجعل السكربت قابلاً للتنفيذ وأشغله؟"]],["المتغيرات",["كيف أقرأ مدخلات المستخدم بـ read؟","ما معنى $1 و $@ و $# و $?؟"]]]],
+["الشروط",[["if و case",["كيف أكتب if مع [[ ]] وما الفرق عن [ ]؟","متى يكون case أفضل من if متعددة؟"]],["الاختبارات",["كيف أختبر وجود ملف أو مجلد بـ -f و -d و -e؟","كيف أقارن الأرقام والنصوص بشكل صحيح؟"]]]],
+["الحلقات",[["أنواع الحلقات",["ما الفرق بين for و while و until؟","كيف أمر على ملفات مجلد دون أخطاء المسافات؟"]],["التحكم",["كيف أقرأ ملفاً سطراً سطراً بـ while read؟","ما عمل break و continue؟"]]]],
+["الدوال والمعاملات",[["الدوال",["كيف أعرّف دالة وأستدعيها وأمرر لها معاملات؟","ما الفرق بين return و echo لإخراج القيمة؟"]],["المعاملات",["كيف أستخدم getopts لخيارات مثل -f -v؟","كيف أتحقق من عدد المعاملات قبل التنفيذ؟"]]]],
+["معالجة الأخطاء",[["الأمان",["ماذا يفعل set -euo pipefail سطراً سطراً؟","لماذا نضع المتغيرات بين علامتي اقتباس دائماً؟"]],["التتبع",["كيف أصحح السكربت بـ bash -x؟","كيف يعمل trap لتنظيف الملفات المؤقتة؟"]]]],
+["sed و awk",[["sed",["كيف أستبدل نصاً في ملف بـ sed s///g؟","متى أستخدم الخيار -i وكيف أحتاط له؟"]],["awk",["كيف أطبع عموداً محدداً بـ awk؟","كيف أجمع قيم عمود وأحسب المتوسط؟"]]]],
+["التعبيرات النمطية",[["regex",["ما الفرق بين regex الأساسية والموسعة -E؟","ماذا تعني الرموز ^ و $ و * و + و []؟"]],["استخراج البيانات",["كيف أجمع cut و sort و uniq -c لعدّ التكرارات؟","كيف أستخرج عناوين IP من ملف سجل؟"]]]],
+["مشروع: سكربت نسخ احتياطي",[["التصميم",["ما خطوات النسخ الاحتياطي الجيد وما الذي يجب حفظه؟","كيف أسمّي النسخ بالتاريخ وأحذف القديمة؟"]],["التنفيذ",["كيف أستخدم tar مع الضغط وأتحقق من سلامة الأرشيف؟","كيف أسجّل نجاح أو فشل السكربت في ملف سجل؟"]]]],
+["القرص والتخزين",[["المساحة",["ما الفرق بين df و du وكيف أجد أكبر المجلدات؟","كيف أعرف سبب امتلاء القرص فجأة؟"]],["الأقسام",["كيف أقرأ مخرجات lsblk و blkid؟","ما وظيفة /etc/fstab وكيف أركّب قرصاً دائماً؟"]]]],
+["الجدولة",[["cron",["كيف أقرأ صيغة cron الخمسة حقول؟","لماذا يفشل سكربت في cron ويعمل يدوياً؟"]],["systemd timers",["ما مزايا timer على cron؟","كيف أنشئ timer مع service لتشغيل سكربتي؟"]]]],
+["الشبكات",[["الأساسيات",["كيف أعرف عنواني بـ ip addr وما الفرق بين IPv4 و IPv6؟","ما وظيفة البوابة و DNS وكيف أتحقق منهما؟"]],["الفحص",["كيف أستخدم ping و traceroute و curl للتشخيص؟","كيف أعرف المنافذ المستمعة بأمر ss -tulnp؟"]]]],
+["SSH",[["الاتصال",["كيف يعمل SSH وما الفرق بين كلمة المرور والمفاتيح؟","كيف أنشئ زوج مفاتيح وأنسخه للخادم؟"]],["التأمين",["ما أهم إعدادات sshd_config للتأمين؟","كيف أعطّل الدخول بكلمة المرور وبحساب root بأمان؟"]]]],
+["جدار الحماية",[["ufw",["ما سياسة deny الافتراضية ولماذا هي أفضل؟","كيف أفتح منفذاً واحداً وأحذف القاعدة لاحقاً؟"]],["المفاهيم",["ما الفرق بين ufw و iptables و nftables؟","كيف أتأكد أنني لن أغلق SSH على نفسي؟"]]]],
+["الأداء والمراقبة",[["الموارد",["كيف أقرأ load average و free -h و vmstat؟","كيف أعرف العملية التي تستهلك المعالج أو الذاكرة؟"]],["التشخيص",["ما هو OOM Killer وكيف أكتشف أنه قتل عملية؟","كيف أراقب القرص بـ iostat أو iotop؟"]]]],
+["الأمان الأساسي",[["التحصين",["كيف أفعّل التحديثات الأمنية التلقائية؟","كيف أجد ملفات SUID وما خطرها؟"]],["المراقبة",["ما هو fail2ban وكيف يمنع هجمات التخمين؟","كيف أراجع آخر عمليات الدخول بأمر last؟"]]]],
+["النسخ الاحتياطي والاستعادة",[["الأدوات",["ما الفرق بين rsync و tar و scp؟","كيف أنفذ نسخاً تزايدياً بـ rsync؟"]],["الاستعادة",["لماذا نسخة غير مجرَّبة ليست نسخة احتياطية؟","كيف أختبر الاستعادة على بيئة منفصلة؟"]]]],
+["مراجعة شاملة",[["ثغرات المعرفة",["ما المفاهيم التي ما زلت لا أستطيع شرحها بلغتي؟","ما الأوامر التي أبحث عنها كثيراً وأنساها؟"]],["تمارين",["كيف أعيد بناء خادم كامل من الصفر بخطوات مكتوبة؟","كيف أكتب cheatsheet خاصاً بي؟"]]]],
+["المشروع النهائي",[["سكربت إدارة خادم",["كيف أصمم سكربتاً يفحص القرص والذاكرة والخدمات ويرسل تقريراً؟","كيف أجدوله بـ cron أو timer وأسجّل نتائجه؟"]],["التوثيق",["كيف أكتب README يشرح الاستخدام والتثبيت؟","ما الخطوة التالية لتعلمي بعد 30 يوماً؟"]]]]
+];
+const K="plan30_q_v2";
+let S;try{S=JSON.parse(localStorage.getItem(K))||{}}catch(e){S={}}
+const g=document.getElementById("g");
+function dayDone(d){return P[d][1].every((t,i)=>t[1].every((_,j)=>S[d+"-"+i+"-"+j]))}
+function save(m){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}if(m){const t=document.getElementById("ts");t.classList.add("s");setTimeout(()=>t.classList.remove("s"),1500)}}
+function render(){
+g.innerHTML=P.map((p,d)=>{const dn=dayDone(d);return `<article class="card${dn?" done":""}"><div class="hd"><div><div class="dn">اليوم ${d+1}</div><h2 class="dt">${p[0]}</h2></div><button class="ck${dn?" on":""}" data-d="${d}"><span class="material-icons">${dn?"check_circle":"radio_button_unchecked"}</span>Check</button></div>${p[1].map((t,i)=>`<div class="tp"><h3 class="tn">${t[0]}</h3><ul class="q">${t[1].map((q,j)=>{const k=d+"-"+i+"-"+j,c=!!S[k];return `<li class="${c?"c":""}"><input type="checkbox" data-k="${k}"${c?" checked":""}><span>${q}</span></li>`}).join("")}</ul></div>`).join("")}</article>`}).join("");
+const n=P.filter((_,d)=>dayDone(d)).length;
+document.getElementById("bar").style.width=Math.round(n/30*100)+"%";
+document.getElementById("pt").textContent=`أنجزت ${n} من 30 يوماً`}
+g.addEventListener("click",e=>{const b=e.target.closest(".ck");if(!b)return;const d=+b.dataset.d,v=!dayDone(d);P[d][1].forEach((t,i)=>t[1].forEach((_,j)=>{S[d+"-"+i+"-"+j]=v}));save();render()});
+g.addEventListener("change",e=>{if(e.target.type!=="checkbox")return;S[e.target.dataset.k]=e.target.checked;save();render()});
+document.getElementById("sv").addEventListener("click",()=>save(true));
+render();
+</script>
+</body>
+</html>
