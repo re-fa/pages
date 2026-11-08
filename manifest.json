@@ -1,0 +1,27 @@
+{
+  "name": "خطة 30 يوماً: Linux و Bash",
+  "short_name": "خطة 30 يوماً",
+  "description": "خطة تعلم Linux Ubuntu Administration مع Bash Scripting في 30 يوماً",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f3ea",
+  "theme_color": "#17695a",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
